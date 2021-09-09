@@ -22,9 +22,9 @@ namespace APP1.Data
             {
                 List<Sondage> lst_sondage = var_sondage.ToList();
                 int lst_length = lst_sondage.Count();
-                if ((lst_length > id) && (id >= 0))
+                if ((lst_length >= id) && (id > 0))
                 {
-                    return lst_sondage.ElementAt(id);
+                    return lst_sondage.ElementAt(id-1);
                 }
             }
             catch (ArgumentNullException e)
@@ -45,7 +45,7 @@ namespace APP1.Data
             throw new IndexOutOfRangeException(String.Format("Invalid form index GetSondageById using index: \"{0}\".", id));
         }
 
-        public IEnumerable<Sondage> GetSondages()
+        public List<Sondage> GetSondages()
         {
             var lstSondage = new List<Sondage>
             {

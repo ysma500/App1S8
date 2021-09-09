@@ -8,7 +8,7 @@ namespace APP1.Data
 {
     public interface ISondage
     {
-        IEnumerable<Sondage> GetSondages();
+        List<Sondage> GetSondages();
         Sondage GetSondageById(int id);
     }
 }

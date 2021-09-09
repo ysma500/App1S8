@@ -27,6 +27,7 @@ namespace APP1.Controllers
         [HttpGet("{id}")]
         public ActionResult <Sondage> GetSondageById(int id)
         {
+            //String this.HttpContext.Request.Headers.HeaderAuthorization; 
             try
             {
                 var var_sondage = _repo.GetSondageById(id);

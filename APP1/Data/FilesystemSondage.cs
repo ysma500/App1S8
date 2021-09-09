@@ -1,4 +1,5 @@
 ﻿using APP1.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,36 +10,90 @@ namespace APP1.Data
 {
     public class FilesystemSondage : ISondage
     {
-        private readonly int MAX = 65536;
+        private readonly ILogger _logger;
+        public FilesystemSondage(ILogger<FilesystemSondage> logger)
+        {
+            _logger = logger;
+        }
         public Sondage GetSondageById(int id)
         {
-            throw new NotImplementedException();
+            List<Sondage> AllSondages = this.GetSondages();
+            try
+            {
+                int lst_length = AllSondages.Count();
+                if ((lst_length >= id) && (id > 0))
+                {
+                    return AllSondages.ElementAt(id-1);
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                _logger.LogError(String.Format("Encoutered ArgumentNull error in GetSondageById with index: \"{0}\". Error message: {1}", id, e.ToString()));
+                return null;
+            }
+            catch (OverflowException e)
+            {
+                _logger.LogError(String.Format("Encoutered Overflow error in GetSondageById with index: \"{0}\". Error message: {1}", id, e.ToString()));
+                return null;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(String.Format("Encoutered UnknownError error in GetSondageById with index: \"{0}\". Error message: {1}", id, e.ToString()));
+                return null;
+            }
+            throw new IndexOutOfRangeException(String.Format("Invalid form index GetSondageById using index: \"{0}\".", id));
         }
 
-        public IEnumerable<Sondage> GetSondages()
+        public List<Sondage> GetSondages()
         {
-            FileStream fileStream = new FileStream("Database/Sondages.txt", FileMode.Open);
-            using (StreamReader reader = new StreamReader(fileStream))
-            {
-                string line = reader.ReadLine();
-            }
+            List<Sondage> SondageList = new List<Sondage>();
+            List<string> SondageLines = new List<string>();
 
-            string[] AllLines = new string[MAX]; //only allocate memory here
-            using (StreamReader sr = File.OpenText("Database/Sondages.txt"))
+            try
             {
-                int x = 0;
-                while (!sr.EndOfStream)
+                using (FileStream fs = File.Open("Database/Sondages.txt", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (BufferedStream bs = new BufferedStream(fs))
+                using (StreamReader sr = new StreamReader(bs))
                 {
-                    AllLines[x] = sr.ReadLine();
-                    x += 1;
+                    string s;
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        if (s != string.Empty)
+                        {
+                            SondageLines.Add(s);
+                        }
+                        else
+                        {
+                            SondageList.Add(new Sondage { JsonString = String.Join("\r\n", SondageLines) });
+                            SondageLines = new List<string>();
+                        }
+                    }
+                    SondageList.Add(new Sondage { JsonString = String.Join("\r\n", SondageLines) });
                 }
-            } //CLOSE THE FILE because we are now DONE with it.
 
-            Parallel.For(0, AllLines.Length, x =>
+                return SondageList;
+            }
+            catch(OutOfMemoryException e)
             {
-                //TestReadingAndProcessingLinesFromFile_DoStuff(AllLines[x]);
-            });
-            throw new NotImplementedException();
+                _logger.LogError(String.Format("Encoutered OutOfMemoryException error in GetSondages. Error message: {0}", e.ToString()));
+            }
+            catch(IOException e)
+            {
+                _logger.LogError(String.Format("Encoutered IOException error in GetSondages. Error message: {0}", e.ToString()));
+            }
+            catch (ArgumentNullException e)
+            {
+                _logger.LogError(String.Format("Encoutered ArgumentNullException error in GetSondages. Error message: {0}", e.ToString()));
+            }
+            catch (ArgumentException e)
+            {
+                _logger.LogError(String.Format("Encoutered ArgumentException error in GetSondages. Error message: {0}", e.ToString()));
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(String.Format("Encoutered UnknownError error in GetSondages. Error message: {0}", e.ToString()));
+            }
+            return null;
         }
     }
 }
