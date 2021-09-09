@@ -28,7 +28,7 @@ namespace APP1
         {
 
             services.AddControllers();
-            services.AddScoped<ISondage, MockSondage>();
+            services.AddScoped<ISondage, FilesystemSondage>();
             services.AddScoped<ISondageReponse, MockSondageReponse>();
             services.AddSwaggerGen(c =>
             {

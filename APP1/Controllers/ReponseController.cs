@@ -1,9 +1,11 @@
 using APP1.Data;
 using APP1.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,17 +27,21 @@ namespace APP1.Controllers
         
         //POST api/reponse
         [HttpPost()]
-        public ActionResult PostReponse()
+        public async Task<ActionResult> PostReponseAsync()
         {
             try
             {
+                Request.EnableBuffering();
+                var rawRequestBody = await new StreamReader(Request.Body).ReadToEndAsync();
+
                 //faire appel
-                _repo.PostSondageReponse(new Reponse { JsonString = "content"});
+                _repo.PostSondageReponse(new Reponse { JsonString = rawRequestBody.ToString() });
+                
                 return Ok();
             }
             catch(NullReferenceException e)
             {
-                _logger.LogError(String.Format("Invalid form content using content: \"{0}\". Request was passed from IP: {1}", "CoNtEnT", "localhost"));
+                _logger.LogError(String.Format("Invalid form content using content: \"{0}\". Request was passed from IP: {1}. Error message: {2}", "CoNtEnT", "localhost", e.ToString()));
             }
             return BadRequest();
         }
