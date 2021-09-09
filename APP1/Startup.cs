@@ -28,7 +28,8 @@ namespace APP1
         {
 
             services.AddControllers();
-            services.AddScoped<ISondage, FilesystemSondage>();
+            services.AddScoped<ISondage, MockSondage>();
+            services.AddScoped<ISondageReponse, MockSondageReponse>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "APP1", Version = "v1" });
