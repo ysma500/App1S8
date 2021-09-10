@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "456c7d32-58ba-42be-b0b8-3de8208d98ca",
+		"_postman_id": "ebe4fc03-2a83-44c5-ac4b-bea219f7deca",
 		"name": "Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,7 +9,13 @@
 			"name": "https-sondage-1",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IllzbWFlbCBGb3J0aWVyIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.aoXbEjNLcO5sJTC_-nVd-dyxeh9vZey_tjUGjQ3Fw64y9qkz8ujsrdZCLbeVgxoY-W_Dib-zaKqE-qAvk1xGVg",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://localhost:40001/api/sondages/1",
 					"protocol": "https",
@@ -30,7 +36,13 @@
 			"name": "https-sondage-2",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IllzbWFlbCBGb3J0aWVyIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.aoXbEjNLcO5sJTC_-nVd-dyxeh9vZey_tjUGjQ3Fw64y9qkz8ujsrdZCLbeVgxoY-W_Dib-zaKqE-qAvk1xGVg",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://localhost:40001/api/sondages/2",
 					"protocol": "https",
@@ -48,10 +60,43 @@
 			"response": []
 		},
 		{
+			"name": "https-sondage-0",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IllzbWFlbCBGb3J0aWVyIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.aoXbEjNLcO5sJTC_-nVd-dyxeh9vZey_tjUGjQ3Fw64y9qkz8ujsrdZCLbeVgxoY-W_Dib-zaKqE-qAvk1xGVg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:40001/api/sondages/0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"api",
+						"sondages",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "https-sondage-bad",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IllzbWFlbCBGb3J0aWVyIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.aoXbEjNLcO5sJTC_-nVd-dyxeh9vZey_tjUGjQ3Fw64y9qkz8ujsrdZCLbeVgxoY-W_Dib-zaKqE-qAvk1xGVg",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "https://localhost:40001/api/sondages/bad",
 					"protocol": "https",
@@ -63,6 +108,36 @@
 						"api",
 						"sondages",
 						"bad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https-sondage-auth-bad-token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "eyJ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://127.0.0.1:40001/api/sondages/1",
+					"protocol": "https",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "40001",
+					"path": [
+						"api",
+						"sondages",
+						"1"
 					]
 				}
 			},
