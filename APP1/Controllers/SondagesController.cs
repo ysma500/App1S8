@@ -38,21 +38,21 @@ namespace APP1.Controllers
                     }
                     else
                     {
-                        _logger.LogError(String.Format("Persistence layer exception with GetSondageById using index: \"{0}\". Request was passed from IP: {1}", id, "localhost"));
+                        _logger.LogError(String.Format("Persistence layer exception with GetSondageById using index: \"{0}\". Request was passed from IP: {1}", id, this.HttpContext.Connection.RemoteIpAddress.ToString()));
                     }
                 }
                 catch (IndexOutOfRangeException e)
                 {
-                    _logger.LogError(String.Format("Invalid form index GetSondageById using index: \"{0}\". Request was passed from IP: {1}. Error message: {2}", id, "localhost", e.ToString()));
+                    _logger.LogError(String.Format("Invalid form index GetSondageById using index: \"{0}\". Request was passed from IP: {1}. Error message: {2}", id, this.HttpContext.Connection.RemoteIpAddress.ToString(), e.ToString()));
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(String.Format("Unknown error using index: \"{0}\". Request was passed from IP: {1}. Error message: {2}", id, "localhost", e.ToString()));
+                    _logger.LogError(String.Format("Unknown error using index: \"{0}\". Request was passed from IP: {1}. Error message: {2}", id, this.HttpContext.Connection.RemoteIpAddress.ToString(), e.ToString()));
                 }
             }
             else
             {
-                _logger.LogError(String.Format("Bad Token error using index: \"{0}\". Request was passed from IP: {1}.", id, "localhost"));
+                _logger.LogError(String.Format("Bad Token error using token: \"{0}\". Request was passed from IP: {1}.", token, this.HttpContext.Connection.RemoteIpAddress.ToString()));
             }
             return BadRequest();
         }

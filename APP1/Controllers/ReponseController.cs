@@ -41,20 +41,20 @@ namespace APP1.Controllers
                 }
                 catch (NullReferenceException e)
                 {
-                    _logger.LogError(String.Format("Invalid form content using content: \"{0}\". Request was passed from IP: {1}. Error message: {2}", form, "localhost", e.ToString()));
+                    _logger.LogError(String.Format("Invalid form content using content: \"{0}\". Request was passed from IP: {1}. Error message: {2}", form, this.HttpContext.Connection.RemoteIpAddress.ToString(), e.ToString()));
                 }
                 catch(UnauthorizedAccessException e)
                 {
-                    _logger.LogError(String.Format("Person has already answered, invalid form content using content: \"{0}\". Request was passed from IP: {1}. Error message: {2}", form, "localhost", e.ToString()));
+                    _logger.LogError(String.Format("Person has already answered, invalid form content using content: \"{0}\". Request was passed from IP: {1}. Error message: {2}", form, this.HttpContext.Connection.RemoteIpAddress.ToString(), e.ToString()));
                 }
                 catch(Exception e)
                 {
-                    _logger.LogError(String.Format("Unkonwn error using content: \"{0}\". Request was passed from IP: {1}. Error message: {2}", form, "localhost", e.ToString()));
+                    _logger.LogError(String.Format("Unkonwn error using content: \"{0}\". Request was passed from IP: {1}. Error message: {2}", form, this.HttpContext.Connection.RemoteIpAddress.ToString(), e.ToString()));
                 }
             }
             else
             {
-                _logger.LogError(String.Format("Bad Token or bad token matching in header and content using content: \"{0}\". Request was passed from IP: {1}.", form, "localhost"));
+                _logger.LogError(String.Format("Bad Token or bad token matching in header and content using content: \"{0}\". Request was passed from IP: {1}.", form, this.HttpContext.Connection.RemoteIpAddress.ToString()));
             }
             return BadRequest();
         }
