@@ -1,0 +1,8 @@
+﻿<?xml version='1.0'?>
+<Obfuscator>
+  <Var name="InPath" value="." />
+  <Var name="OutPath" value="$(InPath)\obfuscated" />
+	<Module file="$(InPath)\APP1.dll">
+		<SkipMethod name="Configure" type="APP1.Startup" />
+	</Module>
+</Obfuscator>

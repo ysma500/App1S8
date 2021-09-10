@@ -43,6 +43,10 @@ namespace APP1.Controllers
             {
                 _logger.LogError(String.Format("Invalid form index GetSondageById using index: \"{0}\". Request was passed from IP: {1}. Error message: {2}", id, "localhost", e.ToString()));
             }
+            catch(Exception e)
+            {
+                _logger.LogError(String.Format("Unknown error using index: \"{0}\". Request was passed from IP: {1}. Error message: {2}", id, "localhost", e.ToString()));
+            }
             return BadRequest();
         }
     }

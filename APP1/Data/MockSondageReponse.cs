@@ -15,11 +15,11 @@ namespace APP1.Data
             _logger = logger;
         }
 
-        public void PostSondageReponse(Reponse reponse)
+        public void PostSondageReponse(Reponse reponse, string token)
         {
-            if (reponse.JsonString != String.Empty)
+            if (reponse != null)
             {
-                _logger.LogInformation(reponse.JsonString);
+                _logger.LogInformation(Newtonsoft.Json.JsonConvert.SerializeObject(reponse));
             }
             else
             {

@@ -8,6 +8,6 @@ namespace APP1.Data
 {
     public interface ISondageReponse
     {
-        void PostSondageReponse(Reponse reponse);
+        void PostSondageReponse(Reponse reponse, string token);
     }
 }

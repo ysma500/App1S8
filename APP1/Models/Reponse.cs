@@ -8,6 +8,15 @@ namespace APP1.Models
 {
     public class Reponse
     {
-        public string JsonString { get; set; }
+        public int SondageId { get; set; }
+        public string ClientId { get; set; }
+        public List<QuestionReponse> reponses { get; set; }
+    }
+
+    public class QuestionReponse
+    {
+        public string question { get; set; }
+        public string reponse { get; set; }
     }
 }
+
