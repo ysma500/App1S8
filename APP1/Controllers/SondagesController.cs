@@ -14,38 +14,45 @@ namespace APP1.Controllers
     public class SondagesController : ControllerBase
     {
         private readonly ISondage _repo;
-
         private readonly ILogger _logger;
+        private readonly IAuthorization _auth;
 
-        public SondagesController(ISondage repo, ILogger<SondagesController> logger)
+        public SondagesController(ISondage repo, ILogger<SondagesController> logger, IAuthorization auth)
         {
             _repo = repo;
             _logger = logger;
+            _auth = auth;
         }
         
         //GET api/sondages/{id}
         [HttpGet("{id}")]
-        public ActionResult <Sondage> GetSondageById(int id)
+        public ActionResult <Sondage> GetSondageById([FromHeader(Name = "Authorization-Token")] string token, int id)
         {
-            //String this.HttpContext.Request.Headers.HeaderAuthorization; 
-            try
-            {
-                var var_sondage = _repo.GetSondageById(id);
-                if (var_sondage != null)
+            if (_auth.ValidateToken(token)){
+                try
                 {
-                    return Ok(var_sondage);
-                } else
+                    var var_sondage = _repo.GetSondageById(id);
+                    if (var_sondage != null)
+                    {
+                        return Ok(var_sondage);
+                    }
+                    else
+                    {
+                        _logger.LogError(String.Format("Persistence layer exception with GetSondageById using index: \"{0}\". Request was passed from IP: {1}", id, "localhost"));
+                    }
+                }
+                catch (IndexOutOfRangeException e)
                 {
-                    _logger.LogError(String.Format("Persistence layer exception with GetSondageById using index: \"{0}\". Request was passed from IP: {1}", id, "localhost"));
+                    _logger.LogError(String.Format("Invalid form index GetSondageById using index: \"{0}\". Request was passed from IP: {1}. Error message: {2}", id, "localhost", e.ToString()));
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(String.Format("Unknown error using index: \"{0}\". Request was passed from IP: {1}. Error message: {2}", id, "localhost", e.ToString()));
                 }
             }
-            catch(IndexOutOfRangeException e)
+            else
             {
-                _logger.LogError(String.Format("Invalid form index GetSondageById using index: \"{0}\". Request was passed from IP: {1}. Error message: {2}", id, "localhost", e.ToString()));
-            }
-            catch(Exception e)
-            {
-                _logger.LogError(String.Format("Unknown error using index: \"{0}\". Request was passed from IP: {1}. Error message: {2}", id, "localhost", e.ToString()));
+                _logger.LogError(String.Format("Bad Token error using index: \"{0}\". Request was passed from IP: {1}.", id, "localhost"));
             }
             return BadRequest();
         }
