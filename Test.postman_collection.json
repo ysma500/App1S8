@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "456c7d32-58ba-42be-b0b8-3de8208d98ca",
+		"name": "Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https-sondage-1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:40001/api/sondages/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"api",
+						"sondages",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https-sondage-2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:40001/api/sondages/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"api",
+						"sondages",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https-sondage-bad",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:40001/api/sondages/bad",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"api",
+						"sondages",
+						"bad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https-reponse-auth-good-token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IllzbWFlbCBGb3J0aWVyIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.aoXbEjNLcO5sJTC_-nVd-dyxeh9vZey_tjUGjQ3Fw64y9qkz8ujsrdZCLbeVgxoY-W_Dib-zaKqE-qAvk1xGVg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"SondageId\":1,\"ClientId\":\"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IllzbWFlbCBGb3J0aWVyIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.aoXbEjNLcO5sJTC_-nVd-dyxeh9vZey_tjUGjQ3Fw64y9qkz8ujsrdZCLbeVgxoY-W_Dib-zaKqE-qAvk1xGVg\",\"reponses\":[{\"question\":\"Q1\",\"reponse\":\"a\"},{\"question\":\"Q2\",\"reponse\":\"a\"},{\"question\":\"Q3\",\"reponse\":\"a\"},{\"question\":\"Q4\",\"reponse\":\"a\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:40001/api/reponse",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"api",
+						"reponse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https-reponse-auth-bad-token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "ey",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"SondageId\":2,\"ClientId\":\"ey\",\"reponses\":[{\"question\":\"Q1\",\"reponse\":\"a\"},{\"question\":\"Q2\",\"reponse\":\"a\"},{\"question\":\"Q3\",\"reponse\":\"a\"},{\"question\":\"Q4\",\"reponse\":\"a\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:40001/api/reponse",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"api",
+						"reponse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https-reponse-auth-good-body",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IllzbWFlbCBGb3J0aWVyIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.aoXbEjNLcO5sJTC_-nVd-dyxeh9vZey_tjUGjQ3Fw64y9qkz8ujsrdZCLbeVgxoY-W_Dib-zaKqE-qAvk1xGVg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"SondageId\":3,\"ClientId\":\"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IllzbWFlbCBGb3J0aWVyIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.aoXbEjNLcO5sJTC_-nVd-dyxeh9vZey_tjUGjQ3Fw64y9qkz8ujsrdZCLbeVgxoY-W_Dib-zaKqE-qAvk1xGVg\",\"reponses\":[{\"question\":\"Q1\",\"reponse\":\"a\"},{\"question\":\"Q2\",\"reponse\":\"a\"},{\"question\":\"Q3\",\"reponse\":\"a\"},{\"question\":\"Q4\",\"reponse\":\"a\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:40001/api/reponse",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"api",
+						"reponse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https-reponse-auth-bad-body",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IllzbWFlbCBGb3J0aWVyIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.aoXbEjNLcO5sJTC_-nVd-dyxeh9vZey_tjUGjQ3Fw64y9qkz8ujsrdZCLbeVgxoY-W_Dib-zaKqE-qAvk1xGVg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:40001/api/reponse",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"api",
+						"reponse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https-reponse-auth-missmatch-token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IkplYW4tQ2hyaXN0b3BoZSBCbGFpcy1DcmVwZWF1IiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.uBTKFtC62sAlnVLg1ATZaFrzwgSPWA9DIWlepRkYD02XFCH7GE6fTd1CfjcKCbXrm56zMudVeg4c3Y77W5Xy3Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"SondageId\":3,\"ClientId\":\"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBcHAxIiwibmFtZSI6IllzbWFlbCBGb3J0aWVyIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.aoXbEjNLcO5sJTC_-nVd-dyxeh9vZey_tjUGjQ3Fw64y9qkz8ujsrdZCLbeVgxoY-W_Dib-zaKqE-qAvk1xGVg\",\"reponses\":[{\"question\":\"Q1\",\"reponse\":\"a\"},{\"question\":\"Q2\",\"reponse\":\"a\"},{\"question\":\"Q3\",\"reponse\":\"a\"},{\"question\":\"Q4\",\"reponse\":\"a\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:40001/api/reponse",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "40001",
+					"path": [
+						"api",
+						"reponse"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
