@@ -26,7 +26,7 @@ namespace APP1.Controllers
         
         //GET api/sondages/{id}
         [HttpGet("{id}")]
-        public ActionResult <Sondage> GetSondageById([FromHeader(Name = "Authorization-Token")] string token, int id)
+        public IActionResult GetSondageById([FromHeader(Name = "Authorization-Token")] string token, int id)
         {
             if (_auth.ValidateToken(token)){
                 try
